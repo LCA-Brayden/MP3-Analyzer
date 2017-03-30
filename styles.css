@@ -1,4 +1,23 @@
 /* BECH MP3 Analyzer - Stylesheet (styles.css)*/
-h1 {
+body {
+	font-family: 'Oswald', sans-serif;
+	text-align: center;
+	font-size: 100%;
+	margin: .5%;
+	color: #ffffff;
+	background-color: black;
+}
 
+h1 {
+	font-family: 'Oswald', sans-serif;
+	text-align: center; 
+	font-weight: 700;
+}
+
+/* ID's and Classes */
+#welcome {
+	font-family: 'Oswald', sans-serif;
+	text-align: center;
+	padding: 5px;
+	padding-left, padding-right: 25px;
 }
