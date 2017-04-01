@@ -14,6 +14,11 @@ h1 {
 	font-weight: 700;
 }
 
+button {
+	width: 112px;
+	margin: 10px;
+}
+
 /* ID's and Classes */
 #welcome {
 	font-family: 'Oswald', sans-serif;
