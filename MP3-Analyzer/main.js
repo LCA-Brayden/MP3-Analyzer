@@ -43,9 +43,9 @@ function setup() {
     nameSpan = document.getElementById("fileName");
 	
     input.onchange = function(e){
-	var music = document.getElementById('sound');
-	music.src = URL.createObjectURL(this.files[0]);
-	music.onend = function(e){
+	var sound = document.getElementById('sound');
+	sound.src = URL.createObjectURL(this.files[0]);
+	sound.onend = function(e){
 		URL.revokeObjectURL(this.src);
 	}
 }
