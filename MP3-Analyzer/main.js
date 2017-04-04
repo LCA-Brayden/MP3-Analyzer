@@ -41,6 +41,14 @@ function setup() {
     startBut = document.querySelector(".start");
     stopBut = document.querySelector(".stop");
     nameSpan = document.getElementById("fileName");
+	
+    input.onchange = function(e){
+	var music = document.getElementById('sound');
+	music.src = URL.createObjectURL(this.files[0]);
+	music.onend = function(e){
+		URL.revokeObjectURL(this.src);
+	}
+}
 }
 
 function draw() {
