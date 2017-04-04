@@ -31,7 +31,7 @@ function setup() {
     textStyle(NORMAL);
 
     // Other Settings 
-    noLoop();
+    // noLoop();
 
  //Variable Declarations
     // Button/HTML Element initializations
