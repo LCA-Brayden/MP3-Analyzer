@@ -8,6 +8,7 @@ var startBut, stopBut, pauseBut, playBut, uploadBut, nameSpan; //HTML Elements
 var fileName; //File Name of sample/uploaded file. (String)
 var scrubber; //Current time on audio file. (float)
 var graphPos, bassLvl, lmLvl, midLvl, hmLvl, trebLvl; //Bar Graph variables (Dimensions & Height of bars)
+var music;
 
 
 function preload() {
@@ -42,10 +43,10 @@ function setup() {
     stopBut = document.querySelector(".stop");
     nameSpan = document.getElementById("fileName");
 	
-    input.onchange = function(e){
-	var music = document.getElementById('sound');
+    input.onchange = function(e) {
+	music = document.getElementById('sound');
 	music.src = URL.createObjectURL(this.files[0]);
-	music.onend = function(e){
+	music.onend = function(e) {
 		URL.revokeObjectURL(this.src);
 	}
 }
