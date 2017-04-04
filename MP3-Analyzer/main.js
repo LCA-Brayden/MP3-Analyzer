@@ -43,10 +43,17 @@ function setup() {
     stopBut = document.querySelector(".stop");
     nameSpan = document.getElementById("fileName");
 	
+<<<<<<< HEAD
     input.onchange = function(e) {
 	music = document.getElementById('music');
 	music.src = URL.createObjectURL(this.files[0]);
 	music.onend = function(e) {
+=======
+    input.onchange = function(e){
+	var sound = document.getElementById('sound');
+	sound.src = URL.createObjectURL(this.files[0]);
+	sound.onend = function(e){
+>>>>>>> origin/button(sound-upload)
 		URL.revokeObjectURL(this.src);
 	}
 }
