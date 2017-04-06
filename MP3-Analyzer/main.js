@@ -28,7 +28,7 @@ function setup() {
 
 	// Image/Shape Settings
     colorMode(RGB, 255);
-    noStroke();
+    stroke(1);
     fill(0,255,0); // spectrum is green
     strokeCap(SQUARE);
     strokeJoin(MITER);
