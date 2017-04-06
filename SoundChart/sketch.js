@@ -41,12 +41,12 @@ function draw(){
     highMidMap = map(graph[3],0,count,0,420);
     trebleMap = map(graph[4],0,count,0,420);
 
+    strokeWeight(4);
+    stroke(255);
     rect(0,height,width/5,-bassMap);
     rect(84,height,width/5,-lowMidMap);
     rect(168,height,width/5,-midMap);
     rect(252,height,width/5,-highMidMap);
     rect(336,height,width/5,-trebleMap);
-
-  console.log(count);
 
 }
