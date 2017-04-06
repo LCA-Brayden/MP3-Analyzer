@@ -17,14 +17,14 @@ function setup() {
 }
 
 function draw(){
-  background(0);
+  background(255);
 
    fft.analyze();
 
    noStroke();
-   fill(0,255,0); // spectrum is green
 
-  graph[0] += fft.getEnergy("bass");
+
+  graph[0] += fft.getEnergy(20,[140]);
     count += fft.getEnergy("bass");
   graph[1] += fft.getEnergy("lowMid");
     count += fft.getEnergy("lowMid");
@@ -42,11 +42,21 @@ function draw(){
     trebleMap = map(graph[4],0,count,0,420);
 
     strokeWeight(4);
-    stroke(255);
+    stroke(0);
+    fill(0,255,0); // spectrum is green
     rect(0,height,width/5,-bassMap);
     rect(84,height,width/5,-lowMidMap);
     rect(168,height,width/5,-midMap);
     rect(252,height,width/5,-highMidMap);
     rect(336,height,width/5,-trebleMap);
+
+    stroke(255,255,255,25);
+    fill(0,0,255,25);
+    rect(0,height,width/5,-fft.getEnergy("bass"));
+    rect(84,height,width/5,-fft.getEnergy("lowMid"));
+    rect(168,height,width/5,-fft.getEnergy("mid"));
+    rect(252,height,width/5,-fft.getEnergy("highMid"));
+    rect(336,height,width/5,-fft.getEnergy("treble"));
+
 
 }
