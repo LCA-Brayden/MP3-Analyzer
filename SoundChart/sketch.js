@@ -21,8 +21,9 @@ function setup() {
 function draw(){
   background(255);
   fft.analyze();
+
+  drawMomentGraph(0,0,420,420);
   drawGraph(0,0,420,420);
-  //drawMomentGraph(0,0,420,420);
 }
 
   function drawGraph(xPos,yPos,wPos,hPos){
@@ -62,11 +63,16 @@ function draw(){
     graph[14] += fft.getEnergy(11066,[14000]);
       count += fft.getEnergy(11066,[14000]);
 
+    strokeWeight(5);
+    stroke(0);
+    line(x+15,y,x+15,y+h-15);
+    line(x+15,y+h-15,x+w,y+h-15);
+
     strokeWeight(4);
     stroke(0);
-    fill(0,255,0);
+    fill(0,255,0,220);
     for(var i = 0; i< graph.length; i++){
-      rect(x+i*(w/graph.length),y+h,w/graph.length,-map(graph[i],0,count/4,0,h));
+      rect((x+15)+i*((w-15)/graph.length),y+h-15,(w-15)/graph.length,-map(graph[i],0,count/4,0,h-15));
     }
 
   }
@@ -93,11 +99,16 @@ function draw(){
     momentGraph[13] = fft.getEnergy(8133,[11066]);
     momentGraph[14] = fft.getEnergy(11066,[14000]);
 
+    strokeWeight(5);
+    stroke(0);
+    line(x+15,y,x+15,y+h-15);
+    line(x+15,y+h-15,x+w,y+h-15);
+
     strokeWeight(4);
     stroke(0);
-    fill(0,0,255);
+    fill(0,0,255,220);
     for(var i = 0; i<momentGraph.length; i++){
-      rect(x+i*(w/momentGraph.length),y+h,w/momentGraph.length,-map(momentGraph[i],0,255,0,h));
+      rect((x+15)+i*((w-15)/momentGraph.length),y+h-15,(w-15)/momentGraph.length,-map(momentGraph[i],0,236,0,h-15));
     }
 
 
