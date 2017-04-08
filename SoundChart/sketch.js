@@ -7,7 +7,7 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(420,420);
+  createCanvas(450,450);
   fft = new p5.FFT();
   sound.play();
 
@@ -21,10 +21,101 @@ function setup() {
 function draw(){
   background(255);
   fft.analyze();
-
+  drawText(0,0,420,420);
   drawMomentGraph(0,0,420,420);
   drawGraph(0,0,420,420);
 }
+
+  function drawText(xPos,yPos,wPos,hPos){
+    var x = xPos;
+    var y = yPos;
+    var w = wPos;
+    var h = hPos;
+
+    textSize(12);
+    noStroke();
+    fill(0);
+    push();
+    translate((x+15)+0*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("20",0,0);
+    pop();
+    push();
+    translate((x+15)+1*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("60",0,0);
+    pop();
+    push();
+    translate((x+15)+2*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("100",0,0);
+    pop();
+    push();
+    translate((x+15)+3*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("140",0,0);
+    pop();
+    push();
+    translate((x+15)+4*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("226",0,0);
+    pop();
+    push();
+    translate((x+15)+5*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("312",0,0);
+    pop();
+    push();
+    translate((x+15)+6*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("400",0,0);
+    pop();
+    push();
+    translate((x+15)+7*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("1133",0,0);
+    pop();
+    push();
+    translate((x+15)+8*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("1866",0,0);
+    pop();
+    push();
+    translate((x+15)+9*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("1600",0,0);
+    pop();
+    push();
+    translate((x+15)+10*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("3466",0,0);
+    pop();
+    push();
+    translate((x+15)+11*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("4332",0,0);
+    pop();
+    push();
+    translate((x+15)+12*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("5200",0,0);
+    pop();
+    push();
+    translate((x+15)+13*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("8133",0,0);
+    pop();
+    push();
+    translate((x+15)+14*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("11066",0,0);
+    pop();
+    push();
+    translate((x+15)+15*((w-15)/graph.length),y+h-5);
+    rotate(PI/4);
+    text("14000",0,0);
+    pop();
+  }
 
   function drawGraph(xPos,yPos,wPos,hPos){
     var x = xPos;
@@ -70,11 +161,10 @@ function draw(){
 
     strokeWeight(4);
     stroke(0);
-    fill(0,255,0,220);
+    fill(0,255,0);
     for(var i = 0; i< graph.length; i++){
       rect((x+15)+i*((w-15)/graph.length),y+h-15,(w-15)/graph.length,-map(graph[i],0,count/4,0,h-15));
     }
-
   }
 
   function drawMomentGraph(xPos,yPos,wPos,hPos){
@@ -106,12 +196,8 @@ function draw(){
 
     strokeWeight(4);
     stroke(0);
-    fill(0,0,255,220);
+    fill(0,0,255);
     for(var i = 0; i<momentGraph.length; i++){
       rect((x+15)+i*((w-15)/momentGraph.length),y+h-15,(w-15)/momentGraph.length,-map(momentGraph[i],0,236,0,h-15));
     }
-
-
-
-
   }
