@@ -20,13 +20,6 @@ function preload() {
 
 function setup() {
 	// Image/Shape Settings
-  input.onchange = function(e) {
-   music = document.getElementById('music');
-   music.src = URL.createObjectURL(this.files[0]);
-   music.onend = function(e) {
-     URL.revokeObjectURL(this.src);
-   }
-  }
     colorMode(RGB, 255);
     noStroke();
     fill(200);
@@ -60,6 +53,14 @@ function setup() {
     nameSpan = document.getElementById("fileName");
 
 // <<<<<<< HEAD
+uploadBut.onchange = function() {
+ music = document.getElementById('music');
+ music.src = URL.createObjectURL(this.files[0]);
+ music = loadSound(this.files[0], playFile, null, whileLoading);
+ music.onend = function() {
+   URL.revokeObjectURL(this.src);
+ }
+}
 }
 function draw() {
 
@@ -82,7 +83,9 @@ function uploadFile() { //Prompt user for an upload, and assign the file name to
 }
 
 function playFile() { //Take current file and begin play at set point.
+    // if (music.isPlaying){
       music.play();
+    // }
 }
 
 function pauseFile() { //Take current file and stop play at set point - make sure to save current point in scrubber.
@@ -94,10 +97,14 @@ function startAnalysis() { //Clear all current data. Begin data analysis loop.
 }
 
 function stopAnalysis() { //Stop current analysis loop - break with some sort of boolean (Say, an if statement within).
-  // music.pause();
-  // music.currentTime = 0;
-  music.stop();
+  music.pause();
+  music.currentTime = 0;
+  // music.stop();
   clear();
+  for(var i = 0; i< 5; i++){
+    graph[i]=0;
+  }
+   fft = new p5.FFT();
 }
 
 function analyzeMusic(){//data analysis main function.
@@ -107,8 +114,7 @@ function analyzeMusic(){//data analysis main function.
 
    noStroke();
 
-
-  graph[0] += fft.getEnergy(20,[140]);
+  graph[0] += fft.getEnergy("bass");
     count += fft.getEnergy("bass");
   graph[1] += fft.getEnergy("lowMid");
     count += fft.getEnergy("lowMid");
@@ -134,11 +140,11 @@ function analyzeMusic(){//data analysis main function.
     rect(252,height,width/5,-highMidMap);
     rect(336,height,width/5,-trebleMap);
 
-    stroke(255,255,255,25);
-    fill(0,0,255,25);
-    rect(0,height,width/5,-fft.getEnergy("bass"));
-    rect(84,height,width/5,-fft.getEnergy("lowMid"));
-    rect(168,height,width/5,-fft.getEnergy("mid"));
-    rect(252,height,width/5,-fft.getEnergy("highMid"));
-    rect(336,height,width/5,-fft.getEnergy("treble"));
+    // stroke(255,255,255,25);
+    // fill(0,0,255,25);
+    // rect(0,height,width/5,-fft.getEnergy("bass"));
+    // rect(84,height,width/5,-fft.getEnergy("lowMid"));
+    // rect(168,height,width/5,-fft.getEnergy("mid"));
+    // rect(252,height,width/5,-fft.getEnergy("highMid"));
+    // rect(336,height,width/5,-fft.getEnergy("treble"));
 }
