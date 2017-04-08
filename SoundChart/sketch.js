@@ -1,6 +1,5 @@
 var graph = [];
 var count = 0;
-var graphMap = [];
 var momentGraph = [];
 
 function preload(){
@@ -14,7 +13,6 @@ function setup() {
 
   for(var i = 0; i< 15; i++){
     graph[i]=0;
-    graphMap[i]=0;
     momentGraph[i] = 0;
   }
 
@@ -23,8 +21,8 @@ function setup() {
 function draw(){
   background(255);
   fft.analyze();
-  //drawGraph(0,0,420,420);
-  drawMomentGraph(0,0,420,420);
+  drawGraph(0,0,420,420);
+  //drawMomentGraph(0,0,420,420);
 }
 
   function drawGraph(xPos,yPos,wPos,hPos){
@@ -64,15 +62,11 @@ function draw(){
     graph[14] += fft.getEnergy(11066,[14000]);
       count += fft.getEnergy(11066,[14000]);
 
-    for(var i = 0; i< graphMap.length; i++){
-      graphMap[i] = map(graph[i],0,count/3,0,h);
-    }
-
     strokeWeight(4);
     stroke(0);
     fill(0,255,0);
-    for(var i = 0; i< graphMap.length; i++){
-      rect(x+i*(w/graphMap.length),y+h,w/graphMap.length,-graphMap[i]);
+    for(var i = 0; i< graph.length; i++){
+      rect(x+i*(w/graph.length),y+h,w/graph.length,-map(graph[i],0,count/4,0,h));
     }
 
   }
