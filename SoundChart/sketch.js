@@ -21,16 +21,42 @@ function setup() {
 function draw(){
   background(0);
   fft.analyze();
-  drawText(0,0,420,420);
+
   drawMomentGraph(0,0,420,420);
   drawGraph(0,0,420,420);
+  drawText(0,0,420,420);
+  drawData();
 }
+  function drawData() {
+    var data = document.getElementById('dataDiv');
+    data.innerHTML = "Hz Range: Count"
+    + "<br> 20-60: " + round(graph[0])
+    + "<br> 60-100:" + round(graph[1])
+    + "<br> 100-140: " + round(graph[2])
+    + "<br> 140-226: " + round(graph[3])
+    + "<br> 226-312: " + round(graph[4])
+    + "<br> 312-400: " + round(graph[5])
+    + "<br> 400-1133: " + round(graph[6])
+    + "<br> 1133-1866: " + round(graph[7])
+    + "<br> 1866-2600: " + round(graph[8])
+    + "<br> 2600-3566: " + round(graph[9])
+    + "<br> 3466-4332: " + round(graph[10])
+    + "<br> 4332-5200: " + round(graph[11])
+    + "<br> 5200-8133: " + round(graph[12])
+    + "<br> 8133-11066: " + round(graph[13])
+    + "<br> 11066-14000: " + round(graph[14]);
+  }
 
   function drawText(xPos,yPos,wPos,hPos){
     var x = xPos;
     var y = yPos;
     var w = wPos;
     var h = hPos;
+
+    strokeWeight(4);
+    stroke(255);
+    line(x+15,y,x+15,y+h-15);
+    line(x+15,y+h-15,x+w,y+h-15);
 
     textSize(12);
     noStroke();
@@ -169,11 +195,6 @@ function draw(){
     graph[14] += fft.getEnergy(11066,[14000]);
       count += fft.getEnergy(11066,[14000]);
 
-    strokeWeight(5);
-    stroke(0);
-    line(x+15,y,x+15,y+h-15);
-    line(x+15,y+h-15,x+w,y+h-15);
-
     strokeWeight(4);
     stroke(0);
     fill(0,255,0);
@@ -203,11 +224,6 @@ function draw(){
     momentGraph[12] = fft.getEnergy(8133,[11066]);
     momentGraph[13] = fft.getEnergy(8133,[11066]);
     momentGraph[14] = fft.getEnergy(11066,[14000]);
-
-    strokeWeight(5);
-    stroke(0);
-    line(x+15,y,x+15,y+h-15);
-    line(x+15,y+h-15,x+w,y+h-15);
 
     strokeWeight(4);
     stroke(0);
