@@ -56,11 +56,11 @@ function setup() {
     analyze = false;
 
     //Upload Button
-       input.onchange = function(e) {
+       uploadBut.onchange = function() {
 	   src = document.querySelector('sound');
 	   src.src = URL.createObjectURL(this.files[0]);
 
-	   src.onend = function(e) {
+	   src.onend = function() {
         origin/button(src-upload)
 	   URL.revokeObjectURL(this.src);
 	   }
@@ -105,9 +105,18 @@ function startAnalysis() { //Clear all current data. Begin data analysis loop.
     //Clear all relevant data (Graph, count values only)
     //Make sure there is an audio file to play
     analyze = true;
+	
+    for(var i = 0; i< 5; i++){
+        graph[i]=0;
+        }
+    count = 0;
 }
 
 function stopAnalysis() { //Stop current analysis loop - break with some sort of boolean (Say, an if statement within). 
+    music.stop;
+	//unable to use with initial value
+	//music.pause;
+	//music.
     analyze = false;
     //Stop music
     //Reset timer on music
