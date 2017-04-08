@@ -8,11 +8,13 @@ var startBut, stopBut, pauseBut, playBut, uploadBut, nameSpan; //HTML Elements
 var fileName; //File Name of sample/uploaded file. (String)
 var scrubber; //Current time on audio file. (float)
 var analyze;
-var sound, src;
-
+var sound, source, file;
+var framerate;
 var graph = [];
 var count = 0;
 var momentGraph = [];
+
+var testFile;
 
 
 function preload() {
@@ -22,6 +24,8 @@ function preload() {
 function setup() {
     createCanvas(420,420);
     fft = new p5.FFT();
+    framerate = 60;
+    frameRate(framerate);
 
     for(var i = 0; i< 15; i++){
         graph[i]=0;
@@ -47,25 +51,19 @@ function setup() {
 
  //Variable Declarations
     // // Button/HTML Element initializations
-    // uploadBut = document.querySelector(".upload");
+    uploadBut = document.querySelector(".upload");
     playBut = document.querySelector(".play");
     pauseBut = document.querySelector(".pause");
     startBut = document.querySelector(".start");
     stopBut = document.querySelector(".stop");
     nameSpan = document.getElementById("fileName");
 
+    source = document.querySelector('.music');
+    file = document.getElementById('input');
+    fileName = 'GoodTimes.mp3';
+
     analyze = false;
 
-    //Upload Button
-       input.onchange = function(e) {
-	   src = document.querySelector('sound');
-	   src.src = URL.createObjectURL(this.files[0]);
-
-	   src.onend = function(e) {
-        origin/button(src-upload)
-	   URL.revokeObjectURL(this.src);
-	   }
-    }
     scrubber = 0;
     sound.playMode('sustain');
 
@@ -74,19 +72,22 @@ function setup() {
 
 function draw() {
     fft.analyze();
-    background(0);
     console.log(count);
 
     scrubber = sound.currentTime();
 
     if (analyze==true) {
+        background(0);
         drawMomentGraph(0,0,420,420);
         drawGraph(0,0,420,420);
     }
+
+    inputerino();
+    uploadData();
 }
 
 function heyListen() { //Adds event listeners to buttons & connects them to functions. 
-	//uploadBut.addEventListener('click', uploadFile);
+	uploadBut.addEventListener('click', uploadFile);
 	playBut.addEventListener('click', playFile);
 	pauseBut.addEventListener('click', pauseFile);
 	startBut.addEventListener('click', startAnalysis);
@@ -102,22 +103,32 @@ function uploadFile() { //Prompt user for an upload, and assign the file name to
 }
 
 function playFile() { //Take current file and begin play at set point. 
-    sound.play();
+    if (sound.isPlaying() == false) {
+        sound.play(scrubber);
+    }
 }
 
 function pauseFile() { //Take current file and stop play at set point - make sure to save current point in scrubber.
-    sound.pause();
+    if (sound.isPlaying() == true) {
+        sound.pause();
+    }
+    else 
+        sound.stop();
 }
 
 function startAnalysis() { //Clear all current data. Begin data analysis loop.
     //Clear all relevant data (Graph, count values only)
     //Make sure there is an audio file to play
+    if (sound.isPlaying() == false) {
+        sound.play();
+    }
     analyze = true;
 }
 
 function stopAnalysis() { //Stop current analysis loop - break with some sort of boolean (Say, an if statement within). 
     analyze = false;
-    //Stop music
+    sound.stop();
+    scrubber=0;
     //Reset timer on music
 
 }
@@ -204,7 +215,31 @@ function stopAnalysis() { //Stop current analysis loop - break with some sort of
     stroke(0);
     fill(0,0,255,220);
     for(var i = 0; i<momentGraph.length; i++){
-      rect((x+15)+i*((w-15)/momentGraph.length),y+h-15,(w-15)/momentGraph.length,-map(momentGraph[i],0,255,0,h-15));
+      rect((x+15)+i*((w-15)/momentGraph.length),y+h-15,(w-15)/momentGraph.length,-map(momentGraph[i],0,255,0,h-20));
     }
   }
 
+  function inputerino() {
+    input.onchange = function(e) {
+       source = document.querySelector('.music');
+       source.src = URL.createObjectURL(this.files[0]);
+
+
+       source.onend = function() {
+        origin/button(src-upload)
+       URL.revokeObjectURL(this.src);
+       }
+    }
+  }
+
+  function uploadData() {
+    if ('files' in file) {
+        if (file.files.length > 1) 
+            nameSpan.innerHTML = "ERROR: More than one file uploaded!";   
+        else {
+            fileName = file.files[0];
+            nameSpan.innerHTML = fileName.name;
+            console.log("File Name = "+fileName);
+        }
+    }  
+  }
