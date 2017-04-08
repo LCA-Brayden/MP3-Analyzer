@@ -19,7 +19,7 @@ function setup() {
 }
 
 function draw(){
-  background(255);
+  background(0);
   fft.analyze();
   drawText(0,0,420,420);
   drawMomentGraph(0,0,420,420);
@@ -34,7 +34,7 @@ function draw(){
 
     textSize(12);
     noStroke();
-    fill(0);
+    fill(255);
     push();
     translate((x+15)+0*((w-15)/graph.length),y+h-5);
     rotate(PI/4);
