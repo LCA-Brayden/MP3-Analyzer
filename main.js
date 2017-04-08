@@ -97,7 +97,7 @@ function stopAnalysis() { //Stop current analysis loop - break with some sort of
   // music.pause();
   // music.currentTime = 0;
   music.stop();
-  analyzeMusic.Clear;
+  clear();
 }
 
 function analyzeMusic(){//data analysis main function.
