@@ -4,7 +4,7 @@
 Authored by Brayden Mitchell, Henry Dustrude, and Christopher Hasselquist.*/
 
 // Variable Initialization
-var startBut, stopBut, pauseBut, playBut, uploadBut, nameSpan; //HTML Elements
+var startBut, stopBut, pauseBut, playBut, /*uploadBut*/ nameSpan; //HTML Elements
 var fileName; //File Name of sample/uploaded file. (String)
 var scrubber; //Current time on audio file. (float)
 var analyze;
@@ -22,7 +22,7 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(420,420);
+    createCanvas(500,500);
     fft = new p5.FFT();
     framerate = 60;
     frameRate(framerate);
@@ -51,7 +51,7 @@ function setup() {
 
  //Variable Declarations
     // // Button/HTML Element initializations
-    uploadBut = document.querySelector(".upload");
+    // uploadBut = document.querySelector(".upload");
     playBut = document.querySelector(".play");
     pauseBut = document.querySelector(".pause");
     startBut = document.querySelector(".start");
@@ -66,6 +66,7 @@ function setup() {
 
     scrubber = 0;
     sound.playMode('sustain');
+    sound.setVolume(0.5);
 
     heyListen();
 }
@@ -75,33 +76,28 @@ function draw() {
     console.log(count);
 
     scrubber = sound.currentTime();
-
     if (analyze==true) {
         background(0);
-        drawMomentGraph(0,0,420,420);
-        drawGraph(0,0,420,420);
+        drawMomentGraph(15,0,420,420);
+        drawGraph(15,0,420,420);
     }
 
+    drawText(15,0,420,420);
     inputerino();
     uploadData();
 }
 
 function heyListen() { //Adds event listeners to buttons & connects them to functions. 
-	uploadBut.addEventListener('click', uploadFile);
 	playBut.addEventListener('click', playFile);
 	pauseBut.addEventListener('click', pauseFile);
 	startBut.addEventListener('click', startAnalysis);
 	stopBut.addEventListener('click', stopAnalysis);
+
+    //  uploadBut.addEventListener('click', uploadFile);
 }
 
 
 //Event Listener Functions
-function uploadFile() { //Prompt user for an upload, and assign the file name to a string var (for display).
-	//Called by upload button via Event Listener. 
-
-    //Upload File & Set Scrubber/Song time to 0. Pause current analysis on call. 
-}
-
 function playFile() { //Take current file and begin play at set point. 
     if (sound.isPlaying() == false) {
         sound.play(scrubber);
@@ -117,7 +113,13 @@ function pauseFile() { //Take current file and stop play at set point - make sur
 }
 
 function startAnalysis() { //Clear all current data. Begin data analysis loop.
-    //Clear all relevant data (Graph, count values only)
+    if (analyze == false) {
+        count = 0;
+        for (i=0; i< graph.length; i++) {
+            graph[i] = 0;
+            console.log("graph["+i+"]: "+graph[i]);
+        }
+    }
     //Make sure there is an audio file to play
     if (sound.isPlaying() == false) {
         sound.play();
@@ -133,7 +135,7 @@ function stopAnalysis() { //Stop current analysis loop - break with some sort of
 
 }
 
-  function drawGraph(xPos,yPos,wPos,hPos){
+function drawGraph(xPos,yPos,wPos,hPos){
     var x = xPos;
     var y = yPos;
     var w = wPos;
@@ -184,7 +186,7 @@ function stopAnalysis() { //Stop current analysis loop - break with some sort of
 
   }
 
-  function drawMomentGraph(xPos,yPos,wPos,hPos){
+function drawMomentGraph(xPos,yPos,wPos,hPos){
     var x = xPos;
     var y = yPos;
     var w = wPos;
@@ -215,14 +217,148 @@ function stopAnalysis() { //Stop current analysis loop - break with some sort of
     stroke(0);
     fill(0,0,255,220);
     for(var i = 0; i<momentGraph.length; i++){
-      rect((x+15)+i*((w-15)/momentGraph.length),y+h-15,(w-15)/momentGraph.length,-map(momentGraph[i],0,255,0,h-20));
+      rect((x+15)+i*((w-15)/momentGraph.length),y+h-15,(w-15)/momentGraph.length,-map(momentGraph[i],0,255,0,h-15));
     }
+    console.log(momentGraph);
   }
 
-  function inputerino() {
+function drawText(xPos,yPos,wPos,hPos) {
+    var x = xPos;
+    var y = yPos;
+    var w = wPos;
+    var h = hPos;
+
+    textSize(12);
+    noStroke();
+    fill(255);
+    push();
+      translate((x+15)+0*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("20",0,0);
+    pop();
+
+    push();
+      translate((x+15)+1*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("60",0,0);
+    pop();
+
+    push();
+      translate((x+15)+2*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("100",0,0);
+    pop();
+
+    push();
+      translate((x+15)+3*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("140",0,0);
+    pop();
+
+    push();
+      translate((x+15)+4*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("226",0,0);
+    pop();
+
+    push();
+      translate((x+15)+5*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("312",0,0);
+    pop();
+
+    push();
+      translate((x+15)+6*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("400",0,0);
+    pop();
+
+    push();
+      translate((x+15)+7*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("1133",0,0);
+    pop();
+
+    push();
+      translate((x+15)+8*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("1866",0,0);
+    pop();
+
+    push();
+      translate((x+15)+9*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("1600",0,0);
+    pop();
+
+    push();
+      translate((x+15)+10*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("3466",0,0);
+    pop();
+
+    push();
+      translate((x+15)+11*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("4332",0,0);
+    pop();
+
+    push();
+      translate((x+15)+12*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("5200",0,0);
+    pop();
+
+    push();
+      translate((x+15)+13*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("8133",0,0);
+    pop();
+
+    push();
+      translate((x+15)+14*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("11066",0,0);
+    pop();
+
+    push();
+      translate((x+15)+15*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("14000",0,0);
+    pop();
+
+    //Y Axis Text
+    push();
+      x = xPos - 15;
+      y = yPos;
+      w = wPos;
+      h = hPos;
+
+      translate((x+15),y+h/2);
+      rotate(PI/-2);
+      text("Energy of Frequency", 0, 0);
+    pop();
+}
+
+function inputerino() {
     input.onchange = function(e) {
+        if (sound.isPlaying() == true) {
+            sound.stop();
+        }
+        if (analyze == true) {
+            analyze = false; 
+            count = 0;
+            for (i=0; i< graph.length; i++) {
+                graph[i] = 0;
+                console.log("graph["+i+"]: "+graph[i]);
+            }
+        }
        source = document.querySelector('.music');
        source.src = URL.createObjectURL(this.files[0]);
+
+
+       fileName = this.files[0].name;
+       sound = loadSound(this.files[0]);
 
 
        source.onend = function() {
@@ -232,14 +368,11 @@ function stopAnalysis() { //Stop current analysis loop - break with some sort of
     }
   }
 
-  function uploadData() {
-    if ('files' in file) {
+function uploadData() {
+        //nameSpan manipulation/Name display
         if (file.files.length > 1) 
-            nameSpan.innerHTML = "ERROR: More than one file uploaded!";   
+            nameSpan.innerHTML = "ERROR: More than one file uploaded! Please try again.";   
         else {
-            fileName = file.files[0];
-            nameSpan.innerHTML = fileName.name;
-            console.log("File Name = "+fileName);
+            nameSpan.innerHTML = "Current Music File: " + fileName;
         }
-    }  
   }
