@@ -9,9 +9,9 @@ var fileName; //File Name of sample/uploaded file. (String)
 var scrubber; //Current time on audio file. (float)
 var graph = [];
 var count = 0;
-var bassMap, lowMidMap, midMap, highMidMap, trebleMap;
 var analyze;
 var sound, src;
+var graphMap, momentGraph = [];
 
 
 function preload() {
