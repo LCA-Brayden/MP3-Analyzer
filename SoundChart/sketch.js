@@ -36,84 +36,99 @@ function draw(){
     noStroke();
     fill(255);
     push();
-    translate((x+15)+0*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("20",0,0);
+      translate((x+15)+0*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("20",0,0);
     pop();
+
     push();
-    translate((x+15)+1*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("60",0,0);
+      translate((x+15)+1*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("60",0,0);
     pop();
+
     push();
-    translate((x+15)+2*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("100",0,0);
+      translate((x+15)+2*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("100",0,0);
     pop();
+
     push();
-    translate((x+15)+3*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("140",0,0);
+      translate((x+15)+3*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("140",0,0);
     pop();
+
     push();
-    translate((x+15)+4*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("226",0,0);
+      translate((x+15)+4*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("226",0,0);
     pop();
+
     push();
-    translate((x+15)+5*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("312",0,0);
+      translate((x+15)+5*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("312",0,0);
     pop();
+
     push();
-    translate((x+15)+6*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("400",0,0);
+      translate((x+15)+6*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("400",0,0);
     pop();
+
     push();
-    translate((x+15)+7*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("1133",0,0);
+      translate((x+15)+7*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("1133",0,0);
     pop();
+
     push();
-    translate((x+15)+8*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("1866",0,0);
+      translate((x+15)+8*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("1866",0,0);
     pop();
+
     push();
-    translate((x+15)+9*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("1600",0,0);
+      translate((x+15)+9*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("1600",0,0);
     pop();
+
     push();
-    translate((x+15)+10*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("3466",0,0);
+      translate((x+15)+10*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("3466",0,0);
     pop();
+
     push();
-    translate((x+15)+11*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("4332",0,0);
+      translate((x+15)+11*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("4332",0,0);
     pop();
+
     push();
-    translate((x+15)+12*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("5200",0,0);
+      translate((x+15)+12*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("5200",0,0);
     pop();
+
     push();
-    translate((x+15)+13*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("8133",0,0);
+      translate((x+15)+13*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("8133",0,0);
     pop();
+
     push();
-    translate((x+15)+14*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("11066",0,0);
+      translate((x+15)+14*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("11066",0,0);
     pop();
+
     push();
-    translate((x+15)+15*((w-15)/graph.length),y+h-5);
-    rotate(PI/4);
-    text("14000",0,0);
+      translate((x+15)+15*((w-15)/graph.length),y+h-5);
+      rotate(PI/4);
+      text("14000",0,0);
     pop();
   }
 
