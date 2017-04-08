@@ -7,11 +7,12 @@ Authored by Brayden Mitchell, Henry Dustrude, and Christopher Hasselquist.*/
 var startBut, stopBut, pauseBut, playBut, uploadBut, nameSpan; //HTML Elements
 var fileName; //File Name of sample/uploaded file. (String)
 var scrubber; //Current time on audio file. (float)
-var graph = [];
-var count = 0;
 var analyze;
 var sound, src;
-var graphMap, momentGraph = [];
+
+var graph = [];
+var count = 0;
+var momentGraph = [];
 
 
 function preload() {
@@ -20,12 +21,12 @@ function preload() {
 
 function setup() {
     createCanvas(420,420);
-      fft = new p5.FFT();
-      sound.play();
+    fft = new p5.FFT();
 
-      for(var i = 0; i< 5; i++){
+    for(var i = 0; i< 15; i++){
         graph[i]=0;
-        }
+        momentGraph[i] = 0;
+    }
 
 	// Image/Shape Settings
     colorMode(RGB, 255);
@@ -65,16 +66,23 @@ function setup() {
 	   URL.revokeObjectURL(this.src);
 	   }
     }
+    scrubber = 0;
+    sound.playMode('sustain');
 
+    heyListen();
 }
 
 function draw() {
     fft.analyze();
+    background(0);
+    console.log(count);
 
-  console.log(count);
+    scrubber = sound.currentTime();
 
-	heyListen();
-    analysis();
+    if (analyze==true) {
+        drawMomentGraph(0,0,420,420);
+        drawGraph(0,0,420,420);
+    }
 }
 
 function heyListen() { //Adds event listeners to buttons & connects them to functions. 
@@ -114,31 +122,89 @@ function stopAnalysis() { //Stop current analysis loop - break with some sort of
 
 }
 
-function analysis () {
-    if (analyze==true) {
-  graph[0] += fft.getEnergy("bass");
-    count += fft.getEnergy("bass");
-  graph[1] += fft.getEnergy("lowMid");
-    count += fft.getEnergy("lowMid");
-  graph[2] += fft.getEnergy("mid");
-    count += fft.getEnergy("mid");
-  graph[3] +=  fft.getEnergy("highMid");
-    count += fft.getEnergy("highMid");
-  graph[4] += fft.getEnergy("treble");
-    count += fft.getEnergy("treble");
+  function drawGraph(xPos,yPos,wPos,hPos){
+    var x = xPos;
+    var y = yPos;
+    var w = wPos;
+    var h = hPos;
 
-    bassMap = map(graph[0],0,count,0,420);
-    lowMidMap = map(graph[1],0,count,0,420);
-    midMap = map(graph[2],0,count,0,420);
-    highMidMap = map(graph[3],0,count,0,420);
-    trebleMap = map(graph[4],0,count,0,420);
+    graph[0] += fft.getEnergy(20,[60]);
+      count += fft.getEnergy(20,[60]);
+    graph[1] += fft.getEnergy(60,[100]);
+      count += fft.getEnergy(60,[100]);
+    graph[2] += fft.getEnergy(100,[140]);
+      count += fft.getEnergy(100,[140]);
+    graph[3] += fft.getEnergy(140,[226]);
+      count += fft.getEnergy(140,[226]);
+    graph[4] += fft.getEnergy(226,[312]);
+      count += fft.getEnergy(226,[312]);
+    graph[5] += fft.getEnergy(312,[400]);
+      count += fft.getEnergy(312,[400]);
+    graph[6] += fft.getEnergy(400,[1133]);
+      count += fft.getEnergy(400,[1133]);
+    graph[7] += fft.getEnergy(1133,[1866]);
+      count += fft.getEnergy(1133,[1866]);
+    graph[8] += fft.getEnergy(1866,[2600]);
+      count += fft.getEnergy(1866,[2600]);
+    graph[9] += fft.getEnergy(2600,[3466]);
+      count += fft.getEnergy(2600,[3466]);
+    graph[10] += fft.getEnergy(3466,[4332]);
+      count += fft.getEnergy(3466,[4332]);
+    graph[11] += fft.getEnergy(4332,[5200]);
+      count += fft.getEnergy(4332,[5200]);
+    graph[12] += fft.getEnergy(8133,[11066]);
+      count += fft.getEnergy(8133,[11066]);
+    graph[13] += fft.getEnergy(8133,[11066]);
+      count += fft.getEnergy(8133,[11066]);
+    graph[14] += fft.getEnergy(11066,[14000]);
+      count += fft.getEnergy(11066,[14000]);
 
-    rect(0,height,width/5,-bassMap);
-    rect(84,height,width/5,-lowMidMap);
-    rect(168,height,width/5,-midMap);
-    rect(252,height,width/5,-highMidMap);
-    rect(336,height,width/5,-trebleMap);
+    strokeWeight(5);
+    stroke(0);
+    line(x+15,y,x+15,y+h-15);
+    line(x+15,y+h-15,x+w,y+h-15);
+
+    strokeWeight(4);
+    stroke(0);
+    fill(0,255,0,220);
+    for(var i = 0; i< graph.length; i++){
+      rect((x+15)+i*((w-15)/graph.length),y+h-15,(w-15)/graph.length,-map(graph[i],0,count/4,0,h-15));
     }
 
-}
+  }
+
+  function drawMomentGraph(xPos,yPos,wPos,hPos){
+    var x = xPos;
+    var y = yPos;
+    var w = wPos;
+    var h = hPos;
+
+    momentGraph[0] = fft.getEnergy(20,[60]);
+    momentGraph[1] = fft.getEnergy(60,[100]);
+    momentGraph[2] = fft.getEnergy(100,[140]);
+    momentGraph[3] = fft.getEnergy(140,[226]);
+    momentGraph[4] = fft.getEnergy(226,[312]);
+    momentGraph[5] = fft.getEnergy(312,[400]);
+    momentGraph[6] = fft.getEnergy(400,[1133]);
+    momentGraph[7] = fft.getEnergy(1133,[1866]);
+    momentGraph[8] = fft.getEnergy(1866,[2600]);
+    momentGraph[9] = fft.getEnergy(2600,[3466]);
+    momentGraph[10] = fft.getEnergy(3466,[4332]);
+    momentGraph[11] = fft.getEnergy(4332,[5200]);
+    momentGraph[12] = fft.getEnergy(8133,[11066]);
+    momentGraph[13] = fft.getEnergy(8133,[11066]);
+    momentGraph[14] = fft.getEnergy(11066,[14000]);
+
+    strokeWeight(5);
+    stroke(0);
+    line(x+15,y,x+15,y+h-15);
+    line(x+15,y+h-15,x+w,y+h-15);
+
+    strokeWeight(4);
+    stroke(0);
+    fill(0,0,255,220);
+    for(var i = 0; i<momentGraph.length; i++){
+      rect((x+15)+i*((w-15)/momentGraph.length),y+h-15,(w-15)/momentGraph.length,-map(momentGraph[i],0,255,0,h-15));
+    }
+  }
 
