@@ -79,7 +79,6 @@ function heyListen() { //Adds event listeners to buttons & connects them to func
 //Event Listener Functions
 function uploadFile() { //Prompt user for an upload, and assign the file name to a string var (for display).
 	//Called by upload button via Event Listener.
-  setPath(this.files[0]);
 }
 
 function playFile() { //Take current file and begin play at set point.
